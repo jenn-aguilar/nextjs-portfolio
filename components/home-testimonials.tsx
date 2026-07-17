@@ -2,12 +2,12 @@
 
 import { Quote } from "lucide-react";
 import { homeConfig } from "@/lib/config/home";
-import { matchesMode } from "@/lib/modes";
-import { useMode } from "./mode-context";
+import { matchesRole } from "@/lib/roles";
+import { useRole } from "./role-context";
 
 export function HomeTestimonials() {
-  const { mode } = useMode();
-  const filtered = homeConfig.testimonials.items.filter((t) => matchesMode(t.modes, mode));
+  const { role } = useRole();
+  const filtered = homeConfig.testimonials.items.filter((t) => matchesRole(t.roles, role));
 
   if (filtered.length === 0) return null;
 

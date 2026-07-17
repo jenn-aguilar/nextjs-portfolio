@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { ArrowRight, GraduationCap, Award } from "lucide-react";
 import { experienceConfig } from "@/lib/config/experience";
-import { matchesMode } from "@/lib/modes";
-import { useMode } from "./mode-context";
+import { matchesRole } from "@/lib/roles";
+import { useRole } from "./role-context";
 
 export function HomeEducation() {
-  const { mode } = useMode();
+  const { role } = useRole();
   const { education, certifications } = experienceConfig;
 
-  const filteredCerts = certifications.filter((c) => matchesMode(c.modes, mode));
+  const filteredCerts = certifications.filter((c) => matchesRole(c.roles, role));
   const topCerts = filteredCerts.slice(0, 4);
   const extra = filteredCerts.length - topCerts.length;
 
@@ -60,7 +60,7 @@ export function HomeEducation() {
             </div>
             {topCerts.length === 0 ? (
               <p className="mt-4 text-sm text-ink-muted">
-                No certifications tagged for this mode.
+                No certifications tagged for this role.
               </p>
             ) : (
               <ul className="mt-4 space-y-2 text-sm text-ink-muted">

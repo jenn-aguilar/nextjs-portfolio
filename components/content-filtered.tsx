@@ -1,24 +1,24 @@
 "use client";
 
-import { ModeProvider, useMode } from "@/components/mode-context";
-import { ModeSelector } from "@/components/mode-selector";
+import { RoleProvider, useRole } from "@/components/role-context";
+import { RoleSelector } from "@/components/role-selector";
 import { ContentGrid } from "@/components/content-grid";
 import { contentConfig } from "@/lib/config/content";
-import { matchesMode } from "@/lib/modes";
+import { matchesRole } from "@/lib/roles";
 
 export function ContentFiltered() {
   return (
-    <ModeProvider>
-      <ModeSelector />
+    <RoleProvider>
+      <RoleSelector compact />
       <FilteredGrid />
-    </ModeProvider>
+    </RoleProvider>
   );
 }
 
 function FilteredGrid() {
-  const { mode } = useMode();
+  const { role } = useRole();
   const posts = [...contentConfig.posts]
-    .filter((p) => matchesMode(p.modes, mode))
+    .filter((p) => matchesRole(p.roles, role))
     .sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
 
   if (posts.length === 0) {

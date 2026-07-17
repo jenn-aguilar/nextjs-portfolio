@@ -28,9 +28,9 @@ export function Nav() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`rounded-full px-3 py-1.5 text-sm transition ${
+                className={`rounded-full px-3 py-1.5 text-sm font-medium transition ${
                   active
-                    ? "bg-accent-soft text-accent"
+                    ? "bg-accent text-black"
                     : "text-ink-muted hover:bg-bg-soft hover:text-ink"
                 }`}
               >

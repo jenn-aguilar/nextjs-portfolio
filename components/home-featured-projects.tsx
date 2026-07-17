@@ -2,15 +2,15 @@
 
 import Link from "next/link";
 import { projectsConfig } from "@/lib/config/projects";
-import { matchesMode } from "@/lib/modes";
-import { useMode } from "./mode-context";
+import { matchesRole } from "@/lib/roles";
+import { useRole } from "./role-context";
 import { ProjectCard } from "./project-card";
 
 export function HomeFeaturedProjects() {
-  const { mode } = useMode();
+  const { role } = useRole();
   const featured = projectsConfig.projects
     .filter((p) => p.featured)
-    .filter((p) => matchesMode(p.modes, mode))
+    .filter((p) => matchesRole(p.roles, role))
     .slice(0, 3);
 
   if (featured.length === 0) return null;

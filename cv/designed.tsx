@@ -189,11 +189,11 @@ export function DesignedCV() {
               <Text style={styles.companyMeta}>
                 {entry.location} · {entry.dates}
               </Text>
-              {entry.roles.map((role) => (
-                <View key={role.title} style={styles.roleBlock}>
-                  <Text style={styles.role_h}>{role.title}</Text>
-                  <Text style={styles.role_meta}>{role.dates}</Text>
-                  {role.bullets.map((b, i) => (
+              {entry.positions.map((position) => (
+                <View key={position.title} style={styles.roleBlock}>
+                  <Text style={styles.role_h}>{position.title}</Text>
+                  <Text style={styles.role_meta}>{position.dates}</Text>
+                  {position.bullets.map((b, i) => (
                     <Text key={i} style={styles.bullet}>
                       • {b}
                     </Text>

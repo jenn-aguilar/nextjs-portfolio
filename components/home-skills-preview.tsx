@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { experienceConfig } from "@/lib/config/experience";
-import { matchesMode } from "@/lib/modes";
-import { useMode } from "./mode-context";
+import { matchesRole } from "@/lib/roles";
+import { useRole } from "./role-context";
 
 export function HomeSkillsPreview() {
-  const { mode } = useMode();
-  const groups = experienceConfig.skills.filter((g) => matchesMode(g.modes, mode));
+  const { role } = useRole();
+  const groups = experienceConfig.skills.filter((g) => matchesRole(g.roles, role));
 
   if (groups.length === 0) return null;
 

@@ -3,13 +3,13 @@
 import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
 import { experienceConfig } from "@/lib/config/experience";
-import { matchesMode } from "@/lib/modes";
-import { useMode } from "./mode-context";
+import { matchesRole } from "@/lib/roles";
+import { useRole } from "./role-context";
 
 export function HomeExperiencePreview() {
-  const { mode } = useMode();
+  const { role } = useRole();
 
-  const filtered = experienceConfig.experience.filter((e) => matchesMode(e.modes, mode));
+  const filtered = experienceConfig.experience.filter((e) => matchesRole(e.roles, role));
   const recent = filtered.slice(0, 3);
 
   return (
@@ -33,8 +33,8 @@ export function HomeExperiencePreview() {
         ) : (
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {recent.map((entry) => {
-              const relevantRoles = entry.roles.filter((r) => matchesMode(r.modes, mode));
-              const currentRole = relevantRoles[0] ?? entry.roles[0];
+              const relevantPositions = entry.positions.filter((p) => matchesRole(p.roles, role));
+              const currentPosition = relevantPositions[0] ?? entry.positions[0];
               return (
                 <Link
                   key={entry.company}
@@ -48,13 +48,13 @@ export function HomeExperiencePreview() {
                   <h3 className="mt-2 font-display text-lg font-semibold text-ink group-hover:text-accent">
                     {entry.company}
                   </h3>
-                  <p className="mt-1 text-sm text-ink">{currentRole.title}</p>
-                  <p className="mt-0.5 text-xs text-ink-faint">{currentRole.dates}</p>
+                  <p className="mt-1 text-sm text-ink">{currentPosition.title}</p>
+                  <p className="mt-0.5 text-xs text-ink-faint">{currentPosition.dates}</p>
                   {entry.summary ? (
                     <p className="mt-3 line-clamp-3 text-sm text-ink-muted">{entry.summary}</p>
                   ) : (
                     <p className="mt-3 line-clamp-3 text-sm text-ink-muted">
-                      {currentRole.bullets[0]}
+                      {currentPosition.bullets[0]}
                     </p>
                   )}
                   {entry.tags && entry.tags.length > 0 && (
@@ -88,7 +88,7 @@ export function HomeExperiencePreview() {
 function EmptyState() {
   return (
     <div className="card mt-8 p-6 text-sm text-ink-muted">
-      No matching roles in this mode — but the{" "}
+      No matching roles — but the{" "}
       <Link href="/experience" className="link-underline text-accent">
         full career page
       </Link>{" "}

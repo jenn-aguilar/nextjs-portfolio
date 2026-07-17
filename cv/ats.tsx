@@ -63,11 +63,11 @@ export function AtsCV() {
                 {entry.company} — {entry.location}
               </Text>
               <Text style={s.meta}>{entry.dates}</Text>
-              {entry.roles.map((role) => (
-                <View key={role.title} style={{ marginBottom: 6 }}>
-                  <Text style={s.role}>{role.title}</Text>
-                  <Text style={s.meta}>{role.dates}</Text>
-                  {role.bullets.map((b, i) => (
+              {entry.positions.map((position) => (
+                <View key={position.title} style={{ marginBottom: 6 }}>
+                  <Text style={s.role}>{position.title}</Text>
+                  <Text style={s.meta}>{position.dates}</Text>
+                  {position.bullets.map((b, i) => (
                     <Text key={i} style={s.bullet}>
                       • {b}
                     </Text>

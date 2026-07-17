@@ -2,30 +2,30 @@
 
 import Link from "next/link";
 import { ArrowUpRight, FileText } from "lucide-react";
-import { ModeProvider, useMode } from "@/components/mode-context";
-import { ModeSelector } from "@/components/mode-selector";
+import { RoleProvider, useRole } from "@/components/role-context";
+import { RoleSelector } from "@/components/role-selector";
 import { papersConfig } from "@/lib/config/papers";
-import { matchesMode } from "@/lib/modes";
+import { matchesRole } from "@/lib/roles";
 
 export function PapersFiltered() {
   return (
-    <ModeProvider>
-      <ModeSelector />
+    <RoleProvider>
+      <RoleSelector compact />
       <FilteredList />
-    </ModeProvider>
+    </RoleProvider>
   );
 }
 
 function FilteredList() {
-  const { mode } = useMode();
+  const { role } = useRole();
   const papers = [...papersConfig.papers]
-    .filter((p) => matchesMode(p.modes, mode))
+    .filter((p) => matchesRole(p.roles, role))
     .sort((a, b) => Number(b.year ?? 0) - Number(a.year ?? 0));
 
   if (papers.length === 0) {
     return (
       <div className="card p-8 text-center text-ink-muted">
-        No papers tagged for this mode.
+        No papers tagged for this role.
       </div>
     );
   }

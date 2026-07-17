@@ -27,14 +27,14 @@ export function Timeline({ items }: { items: readonly ExperienceEntry[] }) {
               )}
 
               <div className="mt-6 space-y-6">
-                {entry.roles.map((role) => (
-                  <div key={role.title} className="border-l border-line pl-4">
+                {entry.positions.map((position) => (
+                  <div key={position.title} className="border-l border-line pl-4">
                     <div className="flex flex-wrap items-baseline justify-between gap-2">
-                      <h4 className="font-medium text-ink">{role.title}</h4>
-                      <span className="text-xs text-ink-faint">{role.dates}</span>
+                      <h4 className="font-medium text-ink">{position.title}</h4>
+                      <span className="text-xs text-ink-faint">{position.dates}</span>
                     </div>
                     <ul className="mt-2 space-y-1.5 text-sm text-ink-muted">
-                      {role.bullets.map((b, i) => (
+                      {position.bullets.map((b, i) => (
                         <li key={i} className="relative pl-4 before:absolute before:left-0 before:top-2 before:h-1 before:w-1 before:rounded-full before:bg-accent/60">
                           {b}
                         </li>

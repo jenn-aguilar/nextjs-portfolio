@@ -1,16 +1,16 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import { MODES, MODE_LABELS, MODE_DESCRIPTIONS, type Mode } from "@/lib/modes";
-import { useMode } from "./mode-context";
+import { ROLES, ROLE_LABELS, ROLE_DESCRIPTIONS, type Role } from "@/lib/roles";
+import { useRole } from "./role-context";
 
 type Props = {
   /** Hide the "Filter the site..." heading + dynamic description. Used on all pages except home. */
   compact?: boolean;
 };
 
-export function ModeSelector({ compact = false }: Props) {
-  const { mode, setMode } = useMode();
+export function RoleSelector({ compact = false }: Props) {
+  const { role, setRole } = useRole();
 
   return (
     <section
@@ -22,27 +22,29 @@ export function ModeSelector({ compact = false }: Props) {
     >
       <div className="container-x">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          {!compact && (
-            <div>
-              <p className="text-sm uppercase tracking-widest text-accent">Modes</p>
-              <h2 className="mt-2 font-display text-2xl font-bold tracking-tight md:text-3xl">
-                Filter the site by what you&apos;re hiring for.
-              </h2>
-              <p className="mt-2 text-sm text-ink-muted">
-                {MODE_DESCRIPTIONS[mode]}
-              </p>
-            </div>
-          )}
+          <div>
+            <p className="text-sm uppercase tracking-widest text-accent">Roles</p>
+            {!compact && (
+              <>
+                <h2 className="mt-2 font-display text-2xl font-bold tracking-tight md:text-3xl">
+                  Filter the site by what you&apos;re hiring for.
+                </h2>
+                <p className="mt-2 text-sm text-ink-muted">
+                  {ROLE_DESCRIPTIONS[role]}
+                </p>
+              </>
+            )}
+          </div>
 
-          <MobileDropdown mode={mode} setMode={setMode} compact={compact} />
+          <MobileDropdown role={role} setRole={setRole} />
 
           <div
             role="tablist"
-            aria-label="Portfolio mode"
+            aria-label="Filter by role"
             className="hidden md:flex flex-wrap gap-1.5 rounded-full border border-line bg-bg-card/60 p-1 backdrop-blur"
           >
-            {MODES.map((m) => (
-              <ModePill key={m} value={m} current={mode} onSelect={setMode} />
+            {ROLES.map((r) => (
+              <RolePill key={r} value={r} current={role} onSelect={setRole} />
             ))}
           </div>
         </div>
@@ -52,29 +54,27 @@ export function ModeSelector({ compact = false }: Props) {
 }
 
 function MobileDropdown({
-  mode,
-  setMode,
-  compact,
+  role,
+  setRole,
 }: {
-  mode: Mode;
-  setMode: (m: Mode) => void;
-  compact: boolean;
+  role: Role;
+  setRole: (r: Role) => void;
 }) {
   return (
-    <div className={`md:hidden ${compact ? "" : ""}`}>
-      <label className="sr-only" htmlFor="mode-select">
-        Filter mode
+    <div className="md:hidden">
+      <label className="sr-only" htmlFor="role-select">
+        Filter by role
       </label>
       <div className="relative">
         <select
-          id="mode-select"
-          value={mode}
-          onChange={(e) => setMode(e.target.value as Mode)}
+          id="role-select"
+          value={role}
+          onChange={(e) => setRole(e.target.value as Role)}
           className="w-full appearance-none rounded-full border border-line bg-bg-card/80 px-4 py-2.5 pr-10 text-sm font-medium text-ink focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
         >
-          {MODES.map((m) => (
-            <option key={m} value={m} className="bg-bg-card text-ink">
-              {MODE_LABELS[m]}
+          {ROLES.map((r) => (
+            <option key={r} value={r} className="bg-bg-card text-ink">
+              {ROLE_LABELS[r]}
             </option>
           ))}
         </select>
@@ -87,14 +87,14 @@ function MobileDropdown({
   );
 }
 
-function ModePill({
+function RolePill({
   value,
   current,
   onSelect,
 }: {
-  value: Mode;
-  current: Mode;
-  onSelect: (m: Mode) => void;
+  value: Role;
+  current: Role;
+  onSelect: (r: Role) => void;
 }) {
   const active = value === current;
   return (
@@ -109,7 +109,7 @@ function ModePill({
           : "text-ink-muted hover:bg-bg-soft hover:text-ink"
       }`}
     >
-      {MODE_LABELS[value]}
+      {ROLE_LABELS[value]}
     </button>
   );
 }

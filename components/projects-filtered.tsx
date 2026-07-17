@@ -1,30 +1,30 @@
 "use client";
 
-import { ModeProvider, useMode } from "@/components/mode-context";
-import { ModeSelector } from "@/components/mode-selector";
+import { RoleProvider, useRole } from "@/components/role-context";
+import { RoleSelector } from "@/components/role-selector";
 import { ProjectCard } from "@/components/project-card";
 import { projectsConfig } from "@/lib/config/projects";
-import { matchesMode } from "@/lib/modes";
+import { matchesRole } from "@/lib/roles";
 
 export function ProjectsFiltered() {
   return (
-    <ModeProvider>
-      <ModeSelector />
+    <RoleProvider>
+      <RoleSelector compact />
       <FilteredGrid />
-    </ModeProvider>
+    </RoleProvider>
   );
 }
 
 function FilteredGrid() {
-  const { mode } = useMode();
+  const { role } = useRole();
   const projects = projectsConfig.projects
-    .filter((p) => matchesMode(p.modes, mode))
+    .filter((p) => matchesRole(p.roles, role))
     .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 
   if (projects.length === 0) {
     return (
       <div className="card p-8 text-center text-ink-muted">
-        No projects tagged for this mode — try another.
+        No projects tagged for this role — try another.
       </div>
     );
   }

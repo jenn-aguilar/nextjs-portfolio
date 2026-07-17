@@ -1,8 +1,8 @@
 import { Hero } from "@/components/hero";
 import { HighlightStats } from "@/components/highlight-stats";
 import { HomeAbout } from "@/components/home-about";
-import { ModeProvider } from "@/components/mode-context";
-import { ModeSelector } from "@/components/mode-selector";
+import { RoleProvider } from "@/components/role-context";
+import { RoleSelector } from "@/components/role-selector";
 import { HomeExperiencePreview } from "@/components/home-experience-preview";
 import { HomeSkillsPreview } from "@/components/home-skills-preview";
 import { HomeFeaturedProjects } from "@/components/home-featured-projects";
@@ -17,14 +17,14 @@ export default function HomePage() {
       <HighlightStats />
       <HomeAbout />
 
-      <ModeProvider>
-        <ModeSelector />
+      <RoleProvider>
+        <RoleSelector />
         <HomeExperiencePreview />
         <HomeSkillsPreview />
         <HomeFeaturedProjects />
         <HomeEducation />
         <HomeTestimonials />
-      </ModeProvider>
+      </RoleProvider>
 
       <CtaStrip />
     </>

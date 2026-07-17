@@ -1,37 +1,36 @@
 "use client";
 
 import { Timeline } from "@/components/timeline";
-import { ModeProvider } from "@/components/mode-context";
-import { ModeSelector } from "@/components/mode-selector";
-import { useMode } from "@/components/mode-context";
+import { RoleProvider, useRole } from "@/components/role-context";
+import { RoleSelector } from "@/components/role-selector";
 import { experienceConfig } from "@/lib/config/experience";
-import { matchesMode } from "@/lib/modes";
+import { matchesRole } from "@/lib/roles";
 
 export function ExperienceFiltered() {
   return (
-    <ModeProvider>
-      <ModeSelector compact />
+    <RoleProvider>
+      <RoleSelector compact />
       <FilteredBody />
-    </ModeProvider>
+    </RoleProvider>
   );
 }
 
 function FilteredBody() {
-  const { mode } = useMode();
+  const { role } = useRole();
   const { experience, skills, education, certifications, otherActivities } = experienceConfig;
 
   const filteredEntries = experience.filter(
-    (e) => matchesMode(e.modes, mode) || e.roles.some((r) => matchesMode(r.modes, mode))
+    (e) => matchesRole(e.roles, role) || e.positions.some((p) => matchesRole(p.roles, role))
   );
-  const filteredSkills = skills.filter((g) => matchesMode(g.modes, mode));
-  const filteredCerts = certifications.filter((c) => matchesMode(c.modes, mode));
-  const filteredOther = otherActivities.filter((a) => matchesMode(a.modes, mode));
+  const filteredSkills = skills.filter((g) => matchesRole(g.roles, role));
+  const filteredCerts = certifications.filter((c) => matchesRole(c.roles, role));
+  const filteredOther = otherActivities.filter((a) => matchesRole(a.roles, role));
 
   return (
     <>
       {filteredEntries.length === 0 ? (
         <div className="card p-8 text-center text-ink-muted">
-          No roles match this mode — try another.
+          No roles match this filter — try another.
         </div>
       ) : (
         <Timeline items={filteredEntries} />
@@ -42,7 +41,7 @@ function FilteredBody() {
           <h2 className="font-display text-xl font-semibold">Skills</h2>
           {filteredSkills.length === 0 ? (
             <p className="mt-4 text-sm text-ink-muted">
-              No skill groups tagged for this mode.
+              No skill groups tagged for this role.
             </p>
           ) : (
             <div className="mt-4 space-y-4 text-sm">
@@ -83,7 +82,7 @@ function FilteredBody() {
           </h2>
           {filteredCerts.length === 0 ? (
             <p className="mt-4 text-sm text-ink-muted">
-              No certifications tagged for this mode.
+              No certifications tagged for this role.
             </p>
           ) : (
             <ul className="mt-4 space-y-1.5 text-sm text-ink-muted">

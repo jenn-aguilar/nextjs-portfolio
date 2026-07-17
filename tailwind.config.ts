@@ -12,20 +12,20 @@ const config: Config = {
     extend: {
       colors: {
         bg: {
-          DEFAULT: "hsl(240 10% 4%)",
-          soft: "hsl(240 8% 8%)",
-          card: "hsl(240 6% 11%)",
+          DEFAULT: "hsl(var(--bg) / <alpha-value>)",
+          soft: "hsl(var(--bg-soft) / <alpha-value>)",
+          card: "hsl(var(--bg-card) / <alpha-value>)",
         },
         ink: {
-          DEFAULT: "hsl(240 10% 96%)",
-          muted: "hsl(240 5% 65%)",
-          faint: "hsl(240 5% 45%)",
+          DEFAULT: "hsl(var(--ink) / <alpha-value>)",
+          muted: "hsl(var(--ink-muted) / <alpha-value>)",
+          faint: "hsl(var(--ink-faint) / <alpha-value>)",
         },
-        line: "hsl(240 5% 20%)",
+        line: "hsl(var(--line) / <alpha-value>)",
         accent: {
           DEFAULT: "#A78BFA",
           hover: "#7C3AED",
-          soft: "rgba(167, 139, 250, 0.12)",
+          soft: "hsl(var(--accent-soft) / <alpha-value>)",
         },
       },
       fontFamily: {
