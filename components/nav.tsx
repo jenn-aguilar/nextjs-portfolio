@@ -10,6 +10,7 @@ import { ThemeToggle } from "./theme-toggle";
 export function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const visibleLinks = siteConfig.navLinks.filter((l) => l.enabled !== false);
 
   return (
     <header className="sticky top-0 z-40 border-b border-line/60 bg-bg/70 backdrop-blur-md">
@@ -22,7 +23,7 @@ export function Nav() {
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
-          {siteConfig.navLinks.map((link) => {
+          {visibleLinks.map((link) => {
             const active = pathname === link.href || pathname.startsWith(link.href + "/");
             return (
               <Link
@@ -65,7 +66,7 @@ export function Nav() {
       {open && (
         <div className="border-t border-line/60 bg-bg md:hidden">
           <div className="container-x flex flex-col gap-1 py-4">
-            {siteConfig.navLinks.map((link) => (
+            {visibleLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
