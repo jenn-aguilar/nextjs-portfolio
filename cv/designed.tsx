@@ -113,7 +113,6 @@ export function DesignedCV() {
             >
               {siteConfig.email}
             </Link>
-            <Text style={[styles.smallText, styles.contact]}>{siteConfig.phone}</Text>
             {siteConfig.socials.linkedin && (
               <Link
                 src={siteConfig.socials.linkedin}

@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { getProject, getProjects } from "@/lib/queries";
-import { Markdown } from "@/components/markdown";
-import { ScreenshotGallery } from "@/components/screenshot-gallery";
+import { ProjectDetailContent } from "@/components/project-detail-content";
 
 export function generateStaticParams() {
   return getProjects().map((p) => ({ slug: p.slug }));
@@ -39,56 +38,7 @@ export default async function ProjectDetail({
         <ArrowLeft size={14} /> All projects
       </Link>
 
-      <header>
-        {project.role && (
-          <p className="text-sm uppercase tracking-widest text-accent">{project.role}</p>
-        )}
-        <h1 className="h-section mt-2">{project.title}</h1>
-        <p className="mt-4 text-lg text-ink-muted">{project.summary}</p>
-
-        {(project.links?.demo || project.links?.repo) && (
-          <div className="mt-6 flex flex-wrap gap-3">
-            {project.links?.demo && (
-              <a
-                href={project.links.demo}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="btn-primary"
-              >
-                Live <ExternalLink size={14} />
-              </a>
-            )}
-            {project.links?.repo && (
-              <a
-                href={project.links.repo}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="btn-outline"
-              >
-                <Github size={14} /> Repo
-              </a>
-            )}
-          </div>
-        )}
-
-        {project.tags && project.tags.length > 0 && (
-          <div className="mt-6 flex flex-wrap gap-1.5">
-            {project.tags.map((t) => (
-              <span key={t} className="chip">
-                {t}
-              </span>
-            ))}
-          </div>
-        )}
-      </header>
-
-      {project.screenshots && project.screenshots.length > 0 && (
-        <ScreenshotGallery screenshots={project.screenshots} />
-      )}
-
-      <div className="mt-12">
-        <Markdown>{project.body}</Markdown>
-      </div>
+      <ProjectDetailContent project={project} />
     </article>
   );
 }

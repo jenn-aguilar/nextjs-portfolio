@@ -13,13 +13,13 @@ export function Footer() {
           <p className="text-xs text-ink-faint">{siteConfig.location} · Built with Next.js + Tailwind</p>
         </div>
         <div className="flex items-center gap-3">
-          <a
-            href={`mailto:${siteConfig.email}`}
-            aria-label="Email"
+          <Link
+            href="/contact"
+            aria-label="Contact"
             className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-muted hover:border-accent hover:text-accent"
           >
             <Mail size={16} />
-          </a>
+          </Link>
           {siteConfig.socials.linkedin && (
             <a
               href={siteConfig.socials.linkedin}

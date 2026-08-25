@@ -36,7 +36,7 @@ export function AtsCV() {
       <Page size="A4" style={s.page}>
         <Text style={s.name}>{siteConfig.name}</Text>
         <Text style={s.contact}>
-          {siteConfig.location} | {siteConfig.email} | {siteConfig.phone}
+          {siteConfig.location} | {siteConfig.email}
           {siteConfig.socials.linkedin ? ` | ${siteConfig.socials.linkedin}` : ""}
         </Text>
 

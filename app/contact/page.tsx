@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { Github, Linkedin, MapPin } from "lucide-react";
 import { siteConfig } from "@/lib/config/site";
 import { CopyButton } from "@/components/copy-button";
 
@@ -28,18 +28,19 @@ export default function ContactPage() {
           <div className="mt-8 space-y-6">
             <div>
               <div className="text-xs uppercase tracking-wider text-ink-faint">Email</div>
-              <div className="mt-1 flex flex-wrap items-center gap-3">
-                <a href={`mailto:${siteConfig.email}`} className="link-underline text-ink">
-                  {siteConfig.email}
-                </a>
-                <CopyButton value={siteConfig.email} label="Copy email" />
+              <p className="mt-2 text-sm text-ink-muted">
+                Copy the address, then paste it into your mail app.
+              </p>
+              <div className="mt-3">
+                <CopyButton
+                  parts={siteConfig.email.split("@")}
+                  joiner="@"
+                  label="Copy email"
+                />
               </div>
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <a href={`mailto:${siteConfig.email}`} className="btn-primary">
-                <Mail size={14} /> Send email
-              </a>
               {siteConfig.socials.linkedin && (
                 <a
                   href={siteConfig.socials.linkedin}

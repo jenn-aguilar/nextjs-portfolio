@@ -5,6 +5,7 @@ import { RoleProvider, useRole } from "@/components/role-context";
 import { RoleSelector } from "@/components/role-selector";
 import { experienceConfig } from "@/lib/config/experience";
 import { matchesRole } from "@/lib/roles";
+import { TechChip } from "@/lib/tech-icons";
 
 export function ExperienceFiltered() {
   return (
@@ -52,9 +53,7 @@ function FilteredBody() {
                   </div>
                   <div className="mt-2 flex flex-wrap gap-1.5">
                     {group.items.map((s) => (
-                      <span key={s} className="chip">
-                        {s}
-                      </span>
+                      <TechChip key={s} name={s} />
                     ))}
                   </div>
                 </div>

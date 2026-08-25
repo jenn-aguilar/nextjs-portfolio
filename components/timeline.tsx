@@ -1,5 +1,6 @@
 import type { ExperienceEntry } from "@/lib/config/experience";
 import { MapPin } from "lucide-react";
+import { TechChip } from "@/lib/tech-icons";
 
 export function Timeline({ items }: { items: readonly ExperienceEntry[] }) {
   return (
@@ -47,9 +48,7 @@ export function Timeline({ items }: { items: readonly ExperienceEntry[] }) {
               {entry.tags && entry.tags.length > 0 && (
                 <div className="mt-6 flex flex-wrap gap-1.5">
                   {entry.tags.map((t) => (
-                    <span key={t} className="chip">
-                      {t}
-                    </span>
+                    <TechChip key={t} name={t} />
                   ))}
                 </div>
               )}

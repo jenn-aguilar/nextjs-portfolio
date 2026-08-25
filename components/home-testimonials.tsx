@@ -7,6 +7,9 @@ import { useRole } from "./role-context";
 
 export function HomeTestimonials() {
   const { role } = useRole();
+
+  if (!homeConfig.testimonials.enabled) return null;
+
   const filtered = homeConfig.testimonials.items.filter((t) => matchesRole(t.roles, role));
 
   if (filtered.length === 0) return null;
