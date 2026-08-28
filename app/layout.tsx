@@ -24,6 +24,10 @@ export const metadata: Metadata = {
     title: siteConfig.ogTitle,
     description: siteConfig.metaDescription,
   },
+  // Default: block indexing on every route. The home page overrides this
+  // with `robots: { index: true, follow: true }` so recruiters can still
+  // find the site via search. Any new route is noindex by default.
+  robots: { index: false, follow: false },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

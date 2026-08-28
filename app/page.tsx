@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Hero } from "@/components/hero";
 import { HighlightStats } from "@/components/highlight-stats";
 import { HomeAbout } from "@/components/home-about";
@@ -9,6 +10,13 @@ import { HomeFeaturedProjects } from "@/components/home-featured-projects";
 import { HomeEducation } from "@/components/home-education";
 import { HomeTestimonials } from "@/components/home-testimonials";
 import { CtaStrip } from "@/components/cta-strip";
+
+// The home page is the ONLY route allowed in search results. Every other
+// route inherits the root layout's noindex default. See app/robots.ts and
+// app/sitemap.ts for the crawler-level equivalents.
+export const metadata: Metadata = {
+  robots: { index: true, follow: true },
+};
 
 export default function HomePage() {
   return (
