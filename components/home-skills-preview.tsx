@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { experienceConfig } from "@/lib/config/experience";
 import { matchesRole } from "@/lib/roles";
 import { useRole } from "./role-context";
-import { TechChip } from "@/lib/tech-icons";
+import { SkillTile } from "@/lib/tech-icons";
 
 export function HomeSkillsPreview() {
   const { role } = useRole();
@@ -39,9 +39,9 @@ export function HomeSkillsPreview() {
                   className="text-ink-faint transition group-hover:translate-x-0.5 group-hover:text-accent"
                 />
               </div>
-              <div className="mt-4 flex flex-wrap gap-1.5">
+              <div className="mt-5 grid grid-cols-5 gap-1.5 sm:gap-2">
                 {group.items.map((skill) => (
-                  <TechChip key={skill} name={skill} />
+                  <SkillTile key={skill} name={skill} size={11} />
                 ))}
               </div>
             </Link>

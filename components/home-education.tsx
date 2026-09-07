@@ -56,7 +56,7 @@ export function HomeEducation() {
           <Link href="/experience" className="card group block p-6 md:p-8">
             <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-accent">
               <Award size={14} />
-              Certifications & training
+              Certifications & Training
             </div>
             {topCerts.length === 0 ? (
               <p className="mt-4 text-sm text-ink-muted">

@@ -5,7 +5,7 @@ import { RoleProvider, useRole } from "@/components/role-context";
 import { RoleSelector } from "@/components/role-selector";
 import { experienceConfig } from "@/lib/config/experience";
 import { matchesRole } from "@/lib/roles";
-import { TechChip } from "@/lib/tech-icons";
+import { SkillTile } from "@/lib/tech-icons";
 
 export function ExperienceFiltered() {
   return (
@@ -37,23 +37,23 @@ function FilteredBody() {
         <Timeline items={filteredEntries} />
       )}
 
-      <div className="mt-16 grid gap-8 md:grid-cols-2">
-        <section className="card p-6 md:p-8">
+      <div className="mt-16 space-y-8">
+        <section>
           <h2 className="font-display text-xl font-semibold">Skills</h2>
           {filteredSkills.length === 0 ? (
             <p className="mt-4 text-sm text-ink-muted">
               No skill groups tagged for this role.
             </p>
           ) : (
-            <div className="mt-4 space-y-4 text-sm">
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
               {filteredSkills.map((group) => (
-                <div key={group.name}>
-                  <div className="text-xs uppercase tracking-wider text-ink-faint">
+                <div key={group.name} className="card p-6">
+                  <div className="text-xs uppercase tracking-wider text-accent">
                     {group.name}
                   </div>
-                  <div className="mt-2 flex flex-wrap gap-1.5">
+                  <div className="mt-5 grid grid-cols-5 gap-1.5 sm:gap-2">
                     {group.items.map((s) => (
-                      <TechChip key={s} name={s} />
+                      <SkillTile key={s} name={s} size={12} />
                     ))}
                   </div>
                 </div>

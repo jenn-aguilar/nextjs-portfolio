@@ -5,6 +5,7 @@ import { ArrowRight, MapPin } from "lucide-react";
 import { experienceConfig } from "@/lib/config/experience";
 import { matchesRole } from "@/lib/roles";
 import { useRole } from "./role-context";
+import { TechChip } from "@/lib/tech-icons";
 
 export function HomeExperiencePreview() {
   const { role } = useRole();
@@ -60,9 +61,7 @@ export function HomeExperiencePreview() {
                   {entry.tags && entry.tags.length > 0 && (
                     <div className="mt-4 flex flex-wrap gap-1.5">
                       {entry.tags.slice(0, 3).map((t) => (
-                        <span key={t} className="chip">
-                          {t}
-                        </span>
+                        <TechChip key={t} name={t} />
                       ))}
                     </div>
                   )}

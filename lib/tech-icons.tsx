@@ -54,6 +54,12 @@ import {
 type IconComp = ComponentType<{ size?: number; color?: string; className?: string }>;
 export type IconEntry = { Icon: IconComp; color: string };
 
+// Theme-adaptive colors for brand marks whose fixed hex fails in one mode.
+// Backed by CSS vars defined in app/globals.css so react-icons resolves the
+// right shade for the active theme without a client-side check.
+const GITHUB_COLOR = "var(--icon-github)";
+const PRACTICES_COLOR = "var(--icon-practices)";
+
 export const TECH_ICONS: Record<string, IconEntry> = {
   // Languages / stacks
   Python: { Icon: SiPython, color: "#3776AB" },
@@ -86,7 +92,7 @@ export const TECH_ICONS: Record<string, IconEntry> = {
   Shopify: { Icon: SiShopify, color: "#7AB55C" },
   Liquid: { Icon: SiShopify, color: "#7AB55C" },
   "SAP Hybris": { Icon: SiSap, color: "#0FAAFF" },
-  GitHub: { Icon: SiGithub, color: "#F5F5F5" },
+  GitHub: { Icon: SiGithub, color: GITHUB_COLOR },
   GitLab: { Icon: SiGitlab, color: "#FC6D26" },
   "VS Code": { Icon: SiVisualstudiocode, color: "#007ACC" },
   Figma: { Icon: SiFigma, color: "#F24E1E" },
@@ -102,17 +108,17 @@ export const TECH_ICONS: Record<string, IconEntry> = {
   NetSuite: { Icon: SiOracle, color: "#C74634" },
 
   // Practices
-  "Agile / Scrum": { Icon: Repeat, color: "#FBBF24" },
-  Kanban: { Icon: KanbanSquare, color: "#FBBF24" },
-  SDLC: { Icon: Columns3, color: "#FBBF24" },
-  TDD: { Icon: TestTube2, color: "#FBBF24" },
-  "CI/CD": { Icon: GitBranch, color: "#FBBF24" },
-  "Unit & automated testing": { Icon: TestTube2, color: "#FBBF24" },
-  "Project management": { Icon: KanbanSquare, color: "#FBBF24" },
-  "E-commerce operations": { Icon: ShoppingCart, color: "#FBBF24" },
-  "EDI / XML / XSLT mapping": { Icon: FileCode2, color: "#FBBF24" },
-  "BI reporting": { Icon: LineChart, color: "#FBBF24" },
-  VBA: { Icon: FileCode2, color: "#FBBF24" },
+  "Agile / Scrum": { Icon: Repeat, color: PRACTICES_COLOR },
+  Kanban: { Icon: KanbanSquare, color: PRACTICES_COLOR },
+  SDLC: { Icon: Columns3, color: PRACTICES_COLOR },
+  TDD: { Icon: TestTube2, color: PRACTICES_COLOR },
+  "CI/CD": { Icon: GitBranch, color: PRACTICES_COLOR },
+  "Unit & automated testing": { Icon: TestTube2, color: PRACTICES_COLOR },
+  "Project management": { Icon: KanbanSquare, color: PRACTICES_COLOR },
+  "E-commerce operations": { Icon: ShoppingCart, color: PRACTICES_COLOR },
+  "EDI / XML / XSLT mapping": { Icon: FileCode2, color: PRACTICES_COLOR },
+  "BI reporting": { Icon: LineChart, color: PRACTICES_COLOR },
+  VBA: { Icon: FileCode2, color: PRACTICES_COLOR },
 
   // Domain
   "E-commerce": { Icon: ShoppingBag, color: "#7AB55C" },
@@ -134,10 +140,42 @@ export function resolveIcon(name: string): IconEntry {
 
 export function TechChip({ name, size = 14 }: { name: string; size?: number }) {
   const { Icon, color } = resolveIcon(name);
+  const isCssVar = color.startsWith("var(");
   return (
     <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-bg-card/60 px-2.5 py-1 text-xs text-ink-muted">
-      <Icon size={size} color={color} />
+      <span
+        className="inline-flex"
+        style={isCssVar ? { color } : undefined}
+      >
+        <Icon size={size} color={isCssVar ? "currentColor" : color} />
+      </span>
       {name}
     </span>
+  );
+}
+
+/**
+ * Larger, centered tile — used inside a grid so each skill reads like a
+ * standalone icon card (see Key skills / Recent experience sections).
+ */
+export function SkillTile({ name, size = 22 }: { name: string; size?: number }) {
+  const { Icon, color } = resolveIcon(name);
+  // CSS var() colors don't work inside lucide's stroke= attribute. Apply the
+  // color to the wrapper and let the icon inherit via currentColor instead.
+  const isCssVar = color.startsWith("var(");
+  return (
+    <div
+      className="group flex aspect-square w-full max-w-[6rem] flex-col items-center justify-center gap-1.5 justify-self-center rounded-lg border border-line bg-bg-card/40 p-1.5 text-center transition hover:-translate-y-0.5 hover:border-accent/60 sm:p-2"
+      style={isCssVar ? { color } : undefined}
+    >
+      <Icon
+        size={size}
+        color={isCssVar ? "currentColor" : color}
+        className="transition group-hover:scale-110"
+      />
+      <span className="text-[8px] font-semibold uppercase leading-tight tracking-wider text-ink-muted group-hover:text-ink sm:text-[9px]">
+        {name}
+      </span>
+    </div>
   );
 }

@@ -17,6 +17,11 @@
 
   --page-glow-1: rgba(167, 139, 250, 0.10);
   --page-glow-2: rgba(124, 58, 237, 0.08);
+
+  /* Brand icons whose fixed hex color fails in one theme.
+   * Consumed via react-icons `color="var(--icon-*)"`. */
+  --icon-github: #f5f5f5;
+  --icon-practices: #fbbf24;
 }
 
 .light {
@@ -34,6 +39,10 @@
 
   --page-glow-1: rgba(167, 139, 250, 0.18);
   --page-glow-2: rgba(124, 58, 237, 0.12);
+
+  /* Contrast-safe overrides on light. */
+  --icon-github: #181717;
+  --icon-practices: #b45309;
 }
 
 html {
