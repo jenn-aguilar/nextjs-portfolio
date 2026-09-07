@@ -7,6 +7,7 @@ import { ProjectCard } from "@/components/project-card";
 import { ProjectModal } from "@/components/project-modal";
 import { projectsConfig } from "@/lib/config/projects";
 import { matchesRole } from "@/lib/roles";
+import { Reveal } from "@/components/reveal";
 
 export function ProjectsFiltered() {
   return (
@@ -65,8 +66,10 @@ function FilteredGrid() {
   return (
     <>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {projects.map((p) => (
-          <ProjectCard key={p.slug} project={p} onOpen={openProject} />
+        {projects.map((p, i) => (
+          <Reveal key={p.slug} delay={Math.min((i % 6) * 0.05, 0.25)}>
+            <ProjectCard project={p} onOpen={openProject} />
+          </Reveal>
         ))}
       </div>
       {active && <ProjectModal project={active} onClose={closeProject} />}

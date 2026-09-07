@@ -6,6 +6,7 @@ import { projectsConfig } from "@/lib/config/projects";
 import { matchesRole } from "@/lib/roles";
 import { useRole } from "./role-context";
 import { ProjectCard } from "./project-card";
+import { Reveal } from "@/components/reveal";
 
 export function HomeFeaturedProjects() {
   const { role } = useRole();
@@ -29,8 +30,10 @@ export function HomeFeaturedProjects() {
           </Link>
         </div>
         <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {featured.map((p) => (
-            <ProjectCard key={p.slug} project={p} />
+          {featured.map((p, i) => (
+            <Reveal key={p.slug} delay={i * 0.08}>
+              <ProjectCard project={p} />
+            </Reveal>
           ))}
         </div>
         <div className="mt-6 sm:hidden">

@@ -1,5 +1,6 @@
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import type { Post } from "@/lib/config/content";
+import { Reveal } from "@/components/reveal";
 
 const platformBadge: Record<string, string> = {
   TikTok: "TT",
@@ -14,7 +15,8 @@ const platformBadge: Record<string, string> = {
 export function ContentGrid({ items }: { items: readonly Post[] }) {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {items.map((data) => {
+      {items.map((data, i) => {
+        const delay = Math.min((i % 6) * 0.05, 0.25);
         const inner = (
           <div className="card group h-full overflow-hidden">
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-gradient-to-br from-accent/20 via-bg-soft to-bg-card">
@@ -58,12 +60,21 @@ export function ContentGrid({ items }: { items: readonly Post[] }) {
             </div>
           </div>
         );
-        return data.url ? (
-          <a key={data.slug} href={data.url} target="_blank" rel="noreferrer noopener" className="block">
-            {inner}
-          </a>
-        ) : (
-          <div key={data.slug}>{inner}</div>
+        return (
+          <Reveal key={data.slug} delay={delay}>
+            {data.url ? (
+              <a
+                href={data.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="block"
+              >
+                {inner}
+              </a>
+            ) : (
+              inner
+            )}
+          </Reveal>
         );
       })}
     </div>

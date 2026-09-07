@@ -6,6 +6,7 @@ import { experienceConfig } from "@/lib/config/experience";
 import { matchesRole } from "@/lib/roles";
 import { useRole } from "./role-context";
 import { TechChip } from "@/lib/tech-icons";
+import { Reveal } from "@/components/reveal";
 
 export function HomeExperiencePreview() {
   const { role } = useRole();
@@ -33,12 +34,12 @@ export function HomeExperiencePreview() {
           <EmptyState />
         ) : (
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {recent.map((entry) => {
+            {recent.map((entry, i) => {
               const relevantPositions = entry.positions.filter((p) => matchesRole(p.roles, role));
               const currentPosition = relevantPositions[0] ?? entry.positions[0];
               return (
+                <Reveal key={entry.company} delay={i * 0.08}>
                 <Link
-                  key={entry.company}
                   href="/experience"
                   className="card group block p-6"
                 >
@@ -66,6 +67,7 @@ export function HomeExperiencePreview() {
                     </div>
                   )}
                 </Link>
+                </Reveal>
               );
             })}
           </div>

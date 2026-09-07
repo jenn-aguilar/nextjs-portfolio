@@ -1,14 +1,41 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import type { ExperienceEntry } from "@/lib/config/experience";
 import { MapPin } from "lucide-react";
 import { TechChip } from "@/lib/tech-icons";
+import { Reveal } from "@/components/reveal";
 
 export function Timeline({ items }: { items: readonly ExperienceEntry[] }) {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 85%", "end 90%"],
+  });
+  const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
   return (
-    <div className="relative">
-      <div className="absolute left-3 top-2 h-full w-px bg-line md:left-4" aria-hidden />
+    <div ref={containerRef} className="relative">
+      {/* Static faint line so the timeline is visible before the animated one draws. */}
+      <div
+        className="absolute left-3 top-2 h-full w-px bg-line/40 md:left-4"
+        aria-hidden
+      />
+      {/* Animated line that extends as the user scrolls through the timeline. */}
+      <motion.div
+        className="absolute left-3 top-2 h-full w-px origin-top bg-accent/70 md:left-4"
+        style={{ scaleY: reduce ? 1 : scaleY }}
+        aria-hidden
+      />
       <div className="space-y-12">
-        {items.map((entry) => (
-          <div key={entry.company} className="relative pl-10 md:pl-14">
+        {items.map((entry, i) => (
+          <Reveal
+            key={entry.company}
+            delay={Math.min(i * 0.06, 0.24)}
+            className="relative pl-10 md:pl-14"
+          >
             <div className="absolute left-0 top-1.5 grid h-7 w-7 place-items-center rounded-full border border-line bg-bg md:left-0.5 md:h-8 md:w-8">
               <div className="h-2 w-2 rounded-full bg-accent" />
             </div>
@@ -53,7 +80,7 @@ export function Timeline({ items }: { items: readonly ExperienceEntry[] }) {
                 </div>
               )}
             </div>
-          </div>
+          </Reveal>
         ))}
       </div>
     </div>

@@ -6,6 +6,7 @@ import { experienceConfig } from "@/lib/config/experience";
 import { matchesRole } from "@/lib/roles";
 import { useRole } from "./role-context";
 import { SkillTile } from "@/lib/tech-icons";
+import { Reveal } from "@/components/reveal";
 
 export function HomeSkillsPreview() {
   const { role } = useRole();
@@ -30,8 +31,9 @@ export function HomeSkillsPreview() {
         </div>
 
         <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {groups.map((group) => (
-            <Link key={group.name} href="/experience" className="card group block p-6">
+          {groups.map((group, i) => (
+            <Reveal key={group.name} delay={Math.min(i * 0.06, 0.24)}>
+            <Link href="/experience" className="card group block p-6">
               <div className="flex items-center justify-between">
                 <div className="text-xs uppercase tracking-wider text-accent">{group.name}</div>
                 <ArrowRight
@@ -45,6 +47,7 @@ export function HomeSkillsPreview() {
                 ))}
               </div>
             </Link>
+            </Reveal>
           ))}
         </div>
 

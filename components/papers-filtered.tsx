@@ -6,6 +6,7 @@ import { RoleProvider, useRole } from "@/components/role-context";
 import { RoleSelector } from "@/components/role-selector";
 import { papersConfig } from "@/lib/config/papers";
 import { matchesRole } from "@/lib/roles";
+import { Reveal } from "@/components/reveal";
 
 export function PapersFiltered() {
   return (
@@ -32,9 +33,9 @@ function FilteredList() {
 
   return (
     <div className="space-y-4">
-      {papers.map((data) => (
+      {papers.map((data, i) => (
+        <Reveal key={data.slug} delay={Math.min(i * 0.05, 0.25)}>
         <Link
-          key={data.slug}
           href={`/papers/${data.slug}`}
           className="card group flex items-start justify-between gap-6 p-6 md:p-8"
         >
@@ -59,6 +60,7 @@ function FilteredList() {
             className="mt-1 shrink-0 text-ink-faint transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
           />
         </Link>
+        </Reveal>
       ))}
     </div>
   );

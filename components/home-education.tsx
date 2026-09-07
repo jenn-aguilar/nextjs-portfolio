@@ -5,6 +5,7 @@ import { ArrowRight, GraduationCap, Award } from "lucide-react";
 import { experienceConfig } from "@/lib/config/experience";
 import { matchesRole } from "@/lib/roles";
 import { useRole } from "./role-context";
+import { Reveal } from "@/components/reveal";
 
 export function HomeEducation() {
   const { role } = useRole();
@@ -33,6 +34,7 @@ export function HomeEducation() {
         </div>
 
         <div className="mt-8 grid gap-4 md:grid-cols-2">
+          <Reveal>
           <Link href="/experience" className="card group block p-6 md:p-8">
             <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-accent">
               <GraduationCap size={14} />
@@ -52,7 +54,9 @@ export function HomeEducation() {
               ))}
             </div>
           </Link>
+          </Reveal>
 
+          <Reveal delay={0.08}>
           <Link href="/experience" className="card group block p-6 md:p-8">
             <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-accent">
               <Award size={14} />
@@ -78,6 +82,7 @@ export function HomeEducation() {
               </ul>
             )}
           </Link>
+          </Reveal>
         </div>
 
         <div className="mt-6 sm:hidden">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Github, Linkedin, MapPin } from "lucide-react";
 import { siteConfig } from "@/lib/config/site";
 import { CopyButton } from "@/components/copy-button";
+import { Reveal } from "@/components/reveal";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -19,6 +20,7 @@ export default function ContactPage() {
       </header>
 
       <div className="grid gap-6 md:grid-cols-2">
+        <Reveal>
         <div className="card p-6 md:p-8">
           <div className="flex items-center gap-2 text-sm text-ink-muted">
             <MapPin size={14} className="text-accent" />
@@ -64,7 +66,9 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
+        </Reveal>
 
+        <Reveal delay={0.08}>
         <div className="card p-6 md:p-8">
           <h2 className="font-display text-lg font-semibold">What I&apos;m looking for</h2>
           <ul className="mt-4 space-y-2 text-sm text-ink-muted">
@@ -82,6 +86,7 @@ export default function ContactPage() {
             <strong className="text-ink">Timezone note:</strong> {c.timezoneNote}
           </div>
         </div>
+        </Reveal>
       </div>
     </div>
   );

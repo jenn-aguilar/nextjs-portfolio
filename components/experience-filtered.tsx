@@ -6,6 +6,7 @@ import { RoleSelector } from "@/components/role-selector";
 import { experienceConfig } from "@/lib/config/experience";
 import { matchesRole } from "@/lib/roles";
 import { SkillTile } from "@/lib/tech-icons";
+import { Reveal } from "@/components/reveal";
 
 export function ExperienceFiltered() {
   return (
@@ -46,8 +47,9 @@ function FilteredBody() {
             </p>
           ) : (
             <div className="mt-6 grid gap-4 md:grid-cols-2">
-              {filteredSkills.map((group) => (
-                <div key={group.name} className="card p-6">
+              {filteredSkills.map((group, i) => (
+                <Reveal key={group.name} delay={Math.min(i * 0.06, 0.24)}>
+                <div className="card p-6">
                   <div className="text-xs uppercase tracking-wider text-accent">
                     {group.name}
                   </div>
@@ -57,11 +59,13 @@ function FilteredBody() {
                     ))}
                   </div>
                 </div>
+                </Reveal>
               ))}
             </div>
           )}
         </section>
 
+        <Reveal>
         <section className="card p-6 md:p-8">
           <h2 className="font-display text-xl font-semibold">Education</h2>
           <div className="mt-4 space-y-3 text-sm">
@@ -96,19 +100,22 @@ function FilteredBody() {
             </ul>
           )}
         </section>
+        </Reveal>
       </div>
 
       {filteredOther.length > 0 && (
         <section className="mt-16">
           <h2 className="h-section">Other professional activities</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {filteredOther.map((a) => (
-              <div key={a.org} className="card p-6">
+            {filteredOther.map((a, i) => (
+              <Reveal key={a.org} delay={Math.min(i * 0.06, 0.24)}>
+              <div className="card p-6">
                 <div className="font-medium text-ink">{a.role}</div>
                 <div className="text-sm text-ink-muted">{a.org}</div>
                 <div className="text-xs text-ink-faint">{a.dates}</div>
                 <p className="mt-3 text-sm text-ink-muted">{a.detail}</p>
               </div>
+              </Reveal>
             ))}
           </div>
         </section>

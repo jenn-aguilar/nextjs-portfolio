@@ -4,6 +4,7 @@ import { Quote } from "lucide-react";
 import { homeConfig } from "@/lib/config/home";
 import { matchesRole } from "@/lib/roles";
 import { useRole } from "./role-context";
+import { Reveal } from "@/components/reveal";
 
 export function HomeTestimonials() {
   const { role } = useRole();
@@ -25,7 +26,8 @@ export function HomeTestimonials() {
 
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {filtered.map((t, i) => (
-            <figure key={i} className="card flex h-full flex-col p-6 md:p-7">
+            <Reveal key={i} delay={i * 0.08} className="h-full">
+            <figure className="card flex h-full flex-col p-6 md:p-7">
               <Quote size={20} className="text-accent" aria-hidden />
               <blockquote className="mt-4 flex-1 text-ink-muted">{t.quote}</blockquote>
               <figcaption className="mt-6 border-t border-line/60 pt-4">
@@ -46,6 +48,7 @@ export function HomeTestimonials() {
                 )}
               </figcaption>
             </figure>
+            </Reveal>
           ))}
         </div>
       </div>
