@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
+import { SiGithub } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa";
 import { siteConfig } from "@/lib/config/site";
 
 export function Footer() {
@@ -28,7 +30,7 @@ export function Footer() {
               rel="noreferrer noopener"
               className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-muted hover:border-accent hover:text-accent"
             >
-              <Linkedin size={16} />
+              <FaLinkedin size={16} />
             </a>
           )}
           {siteConfig.socials.github && (
@@ -39,7 +41,7 @@ export function Footer() {
               rel="noreferrer noopener"
               className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-muted hover:border-accent hover:text-accent"
             >
-              <Github size={16} />
+              <SiGithub size={16} />
             </a>
           )}
           <Link href="/contact" className="link-underline text-sm text-ink-muted">

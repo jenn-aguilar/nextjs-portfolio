@@ -1,4 +1,5 @@
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+import { SiGithub } from "react-icons/si";
 import type { Project } from "@/lib/config/projects";
 import { Markdown } from "@/components/markdown";
 import { ScreenshotGallery } from "@/components/screenshot-gallery";
@@ -33,7 +34,7 @@ export function ProjectDetailContent({ project }: { project: Project }) {
                 rel="noreferrer noopener"
                 className="btn-outline"
               >
-                <Github size={14} /> Repo
+                <SiGithub size={14} /> Repo
               </a>
             )}
           </div>

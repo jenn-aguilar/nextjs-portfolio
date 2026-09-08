@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { Github, Linkedin, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
+import { SiGithub } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa";
 import { siteConfig } from "@/lib/config/site";
 import { CopyButton } from "@/components/copy-button";
 import { Reveal } from "@/components/reveal";
@@ -50,7 +52,7 @@ export default function ContactPage() {
                   rel="noreferrer noopener"
                   className="btn-outline"
                 >
-                  <Linkedin size={14} /> LinkedIn
+                  <FaLinkedin size={14} /> LinkedIn
                 </a>
               )}
               {siteConfig.socials.github && (
@@ -60,7 +62,7 @@ export default function ContactPage() {
                   rel="noreferrer noopener"
                   className="btn-outline"
                 >
-                  <Github size={14} /> GitHub
+                  <SiGithub size={14} /> GitHub
                 </a>
               )}
             </div>
