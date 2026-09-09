@@ -2,11 +2,13 @@ import Link from "next/link";
 import { ArrowRight, Download, MapPin } from "lucide-react";
 import { siteConfig } from "@/lib/config/site";
 import { homeConfig } from "@/lib/config/home";
+import { SkyTowerBg } from "@/components/sky-tower-bg";
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden">
-      <div className="container-x pt-16 pb-14 md:pt-24 md:pb-20">
+      <SkyTowerBg />
+      <div className="container-x relative pt-16 pb-14 md:pt-24 md:pb-20">
         <div className="animate-fadeUp">
           <span className="inline-flex items-center gap-2 rounded-full border border-line bg-bg-card/60 px-3 py-1 text-xs text-ink-muted">
             <MapPin size={12} className="text-accent" />
